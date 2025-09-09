@@ -1,0 +1,3 @@
+Dear Customer,
+Welcome to Ektaara
+Your OTP to complete the transaction is: [[${otp}]]

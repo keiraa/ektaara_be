@@ -1,0 +1,12 @@
+Dear Customer,
+
+Welcome to Ektaara – your destination for timeless jewelry.
+
+Your OTP to complete the transaction is: [[${otp}]]
+
+This code is valid for 5 minutes.
+
+Thank you for choosing Ektaara.
+Wear elegance every day.
+
+💎 Ektaara Team
