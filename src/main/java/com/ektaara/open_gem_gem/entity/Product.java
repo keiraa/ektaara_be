@@ -1,5 +1,7 @@
 package com.ektaara.open_gem_gem.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,14 +28,13 @@ public class Product {
 
     private String productName;
 
-    private String l1Category;
-
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+    @JsonIgnore
     private Set<Category> categories = new HashSet<>();
 
     private Double sellingPrice;
@@ -50,7 +51,8 @@ public class Product {
 
     private String sku;
 
-    private Blob productDescription;
+    @Column(name = "product_description", columnDefinition = "TEXT")
+    private String productDescriptionJson;
 
 
 }

@@ -1,33 +1,25 @@
-package com.ektaara.open_gem_gem.dto;
-
+package com.ektaara.open_gem_gem.dto;// ProductResponse.java
+import com.ektaara.open_gem_gem.entity.Category;
+import com.ektaara.open_gem_gem.model.ProductDescription;
 import lombok.Builder;
 import lombok.Data;
 
-import java.sql.Blob;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
-public class ProductRequest {
+public class ProductResponse {
+    private Long id;
     private String productName;
-
     private String l1Category;
-
-    private List<Long> Categories;
-
     private Double sellingPrice;
-
     private Double mrp;
-
     private String discountType;
-
     private Double discount;
-
     private String iconImageUrl;
-
     private List<String> imageUrl;
-
     private String sku;
-
-    private Blob productDescription;
+    private ProductDescription productDescription; // Object, not string
+    private Set<Category> categories;
 }

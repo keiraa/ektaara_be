@@ -23,6 +23,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ektaara
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+      GOOGLE_APPLICATION_CREDENTIALS: /Users/ravi/Desktop/Ektaara/open-gem-gem/src/main/resources/poised-conduit-471220-b4-3db35b51d2f0.json (replaced with mounted value later for deployments)
 
 volumes:
   pgdata:
