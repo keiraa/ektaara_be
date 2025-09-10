@@ -1,14 +1,18 @@
 package com.ektaara.open_gem_gem.service;
 
+import com.ektaara.open_gem_gem.dto.OtpVerificationResponse;
+import com.ektaara.open_gem_gem.dto.UserResponse;
 import com.ektaara.open_gem_gem.entity.User;
 import com.ektaara.open_gem_gem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -39,24 +43,25 @@ public class UserService {
         smsSender.sendSms(phone, message);
     }
 
-    public boolean verifyOtpAndRegister(String phone, String otp, String name) {
-        Optional<User> optionalUser = userRepository.findByPhone(phone);
-
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-
-            if (user.getOtp().equals(otp) && user.getOtpExpiry().isAfter(LocalDateTime.now())) {
-                user.setPhoneVerified(true);
-                user.setName(name);
-                user.setOtp(null);
-                user.setOtpExpiry(null);
-                userRepository.save(user);
-                return true;
-            }
-        }
-
-        return false;
+    public OtpVerificationResponse verifyOtpAndRegister(String phone, String otp, String name) {
+        return userRepository.findByPhone(phone)
+                .filter(user -> user.getOtp().equals(otp) && user.getOtpExpiry().isAfter(LocalDateTime.now()))
+                .map(user -> {
+                    user.setPhoneVerified(true);
+                    user.setName(name);
+                    user.setOtp(null);
+                    user.setOtpExpiry(null);
+                    userRepository.save(user);
+                    log.info("User Response for verification");
+                    return OtpVerificationResponse.builder().isVerified(true).user(UserResponse.builder()
+                            .email(user.getEmail()).name(user.getName())
+                            .phone(user.getPhone()).otp(user.getOtp())
+                            .isPhoneVerified(user.isPhoneVerified())
+                            .build()).build();
+                })
+                .orElse(OtpVerificationResponse.builder().isVerified(false).build());
     }
+
 
     private String generateOtp() {
         return String.valueOf(new Random().nextInt(900000) + 100000);
