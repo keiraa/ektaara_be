@@ -1,14 +1,18 @@
 package com.ektaara.open_gem_gem.dto;// ProductResponse.java
 import com.ektaara.open_gem_gem.entity.Category;
 import com.ektaara.open_gem_gem.model.ProductDescription;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Set;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductResponse {
     private Long id;
     private String productName;
