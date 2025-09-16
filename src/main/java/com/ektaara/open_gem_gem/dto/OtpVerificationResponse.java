@@ -13,4 +13,7 @@ import lombok.NoArgsConstructor;
 public class OtpVerificationResponse {
     private boolean isVerified;
     private UserResponse user;
+    private String accessToken;
+    private String refreshToken;
 }
+

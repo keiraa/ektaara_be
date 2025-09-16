@@ -22,5 +22,7 @@ public class UserResponse {
 
     private boolean isPhoneVerified;
 
+    private boolean isNotificationEnabled;
+
     private String otp;
 }

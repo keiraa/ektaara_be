@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class OtpVerificationRequest {
     private String phone;
     private String otp;
-    private String name;
 }
