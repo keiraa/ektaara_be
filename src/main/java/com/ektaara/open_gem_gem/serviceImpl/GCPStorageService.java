@@ -5,6 +5,7 @@ import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,9 +13,11 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class GCPStorageService implements StorageService {
 
-    private final Storage storage = StorageOptions.getDefaultInstance().getService();
+    private final Storage storage;
+
     private final String bucketName = "ektaara";
 
     public String uploadFile(MultipartFile file) {

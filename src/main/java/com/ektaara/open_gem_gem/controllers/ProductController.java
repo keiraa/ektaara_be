@@ -5,6 +5,7 @@ import com.ektaara.open_gem_gem.entity.Product;
 import com.ektaara.open_gem_gem.exceptions.InvalidProductDescriptionException;
 
 import com.ektaara.open_gem_gem.service.ProductService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,10 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/products")
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
 
     @PostMapping(consumes = {"multipart/form-data"})
     public ResponseEntity<?> createProduct(

@@ -49,6 +49,7 @@ public class Product {
 
     private List<String> imageUrl;
 
+    @Column(unique = true, nullable = false)
     private String sku;
 
     @Column(name = "product_description", columnDefinition = "TEXT")
